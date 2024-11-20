@@ -1,0 +1,32 @@
+{% extends 'navheader.html' %}
+{% block header %}
+        <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+            <div class="w-75 border shadow bg-light p-3 mt-5">
+                {% if messages %}
+                    {% for i in messages %}
+                    {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>{{i}}</strong>
+                    </div>
+                    {% endif %}
+                    {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>{{i}}</strong>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <h3 class="text-center p-2 text-warning" style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bold;">Edit Student Details</h3>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table class="table">
+                        {{form.as_table}}
+                    </table>
+                    <button class="btn btn-outline-success">Update</button>
+                </form>
+            </div>
+        </div>
+
+{% endblock header %}

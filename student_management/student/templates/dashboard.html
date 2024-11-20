@@ -1,0 +1,67 @@
+
+{% extends 'navheader.html' %}
+{% block header %}
+{% load static %}
+{% if messages %}
+                    {% for i in messages %}
+                    {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>{{i}}</strong>
+                    </div>
+                    {% endif %}
+                    {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>{{i}}</strong>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+          <a href="{% url 'add' %}" class="btn btn-outline-info ms-3 mt-2" style="width: 90px;">
+          <i class="fa-solid fa-plus"></i>
+           <img src="{% static 'stu2.png' %}" height="40px" alt="">
+        </a>
+          <table class="table table-light table-bordered w-100 mt-3 ">
+            <thead class="table-secondary">
+               
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Place</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>Phone number</th>
+                    <th>Email</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{i.admission_number}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.place}}</td>
+                    <td>{{i.age}}</td>
+                    <td>{{i.department}}</td>
+                    <td>{{i.phone_number}}</td>
+                    <td>{{i.email}}</td>
+                    <td>
+                        <img src="{{i.image.url}}" height="250px" alt="student_image">
+                    </td>
+                    <td>
+                        <a href="{% url 'edit' i.id %}" class="btn me-3">
+                            <i class="fa-solid fa-pen-to-square" style="color: #FFD43B;"></i>
+                        </a>
+                        <a href="{% url 'delete' i.id %}" class="btn">
+                            <i class="fa-solid fa-trash" style="color: #c22e14;"></i>
+                        </a>
+                    </td>
+                </tr>
+          {% endfor %}
+                
+            </tbody>
+          </table>
+          {% endblock header %}
